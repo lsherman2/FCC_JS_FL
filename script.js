@@ -5,6 +5,7 @@ const avatarUrl = "https://sea1.discourse-cdn.com/freecodecamp";
 
 const postsContainer = document.getElementById("posts-container");
 
+
 const timeAgo = (time) => {
   const currentTime = new Date();
   const lastPost = new Date(time);
@@ -25,6 +26,16 @@ const timeAgo = (time) => {
   }
 
   return `${daysAgo}d ago`;
+};
+
+const viewCount = (views) => {
+  const thousands = Math.floor(views / 1000);
+
+  if (views >= 1000) {
+    return `${thousands}k`;
+  }
+
+  return views;
 };
 
 const fetchData = async () => {
@@ -62,7 +73,7 @@ const showLatestPosts = (data) => {
       </td>
       <td></td>
       <td>${posts_count - 1}</td>
-      <td>${views}</td>
+      <td>${viewCount(views)}</td>
       <td>${timeAgo(bumped_at)}</td>
     </tr>`;
   }).join("");
